@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Olivia Taylor-Gao</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sage: #7a9e7e;
+      --sage-light: #b5ceb8;
+      --sage-dark: #4a6b4e;
+      --cream: #f8f4ed;
+      --warm-white: #fdfaf5;
+      --ink: #1c1c1c;
+      --ink-soft: #4a4a4a;
+      --accent: #c47c5a;
+      --accent-light: #e8b89a;
+      --rule: rgba(122,158,126,0.25);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--warm-white);
+      color: var(--ink);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(253,250,245,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.9rem 3rem;
+    }
+    .nav-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; letter-spacing: 0.02em;
+      color: var(--sage-dark); white-space: nowrap;
+    }
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; flex-wrap: nowrap; }
+    .nav-links a {
+      text-decoration: none; font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--ink-soft); white-space: nowrap;
+      padding: 0.3rem 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--sage-dark); border-bottom-color: var(--sage); }
+
+    /* Mobile: nav scrolls horizontally */
+    @media (max-width: 700px) {
+      .nav-inner { padding: 0.75rem 1.25rem; }
+      .nav-name { display: none; }
+      .nav-links { gap: 1.25rem; overflow-x: auto; padding-bottom: 2px; }
+      .nav-links::-webkit-scrollbar { display: none; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr;
+      padding-top: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0; z-index: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 80% 50%, rgba(181,206,184,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 20% 80%, rgba(196,124,90,0.08) 0%, transparent 60%);
+    }
+    .hero-left {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 3rem 5rem 6rem;
+    }
+    .hero-tag {
+      font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--sage);
+      margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero-tag::before {
+      content: ''; display: block; width: 2rem; height: 1px; background: var(--sage);
+    }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      line-height: 1.08;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--ink);
+    }
+    h1 em {
+      font-style: italic; color: var(--sage-dark);
+    }
+    .hero-bio {
+      font-size: 1.05rem; font-weight: 300; color: var(--ink-soft);
+      max-width: 440px; line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+    .hero-pills {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .pill {
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.05em;
+      padding: 0.4rem 0.9rem;
+      border-radius: 100px;
+      border: 1px solid var(--sage-light);
+      color: var(--sage-dark);
+      background: rgba(122,158,126,0.07);
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+    }
+    .btn {
+      text-decoration: none; font-size: 0.85rem; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.85rem 2rem; border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: var(--sage-dark); color: white;
+    }
+    .btn-primary:hover { background: var(--sage); }
+    .btn-ghost {
+      border: 1px solid var(--ink-soft); color: var(--ink-soft);
+    }
+    .btn-ghost:hover { border-color: var(--ink); color: var(--ink); }
+
+    .hero-right {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; justify-content: center;
+      align-items: center; padding: 5rem 4rem 5rem 2rem;
+    }
+    .hero-stats {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; width: 100%; max-width: 360px;
+    }
+    .stat-card {
+      background: white;
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700;
+      color: var(--sage-dark);
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+    .stat-label {
+      font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.04em; color: var(--ink-soft);
+      text-transform: uppercase;
+    }
+    .stat-card.accent { border-color: var(--accent-light); }
+    .stat-card.accent .stat-number { color: var(--accent); }
+
+    /* ── SECTION SHARED ── */
+    section { padding: 6rem 6rem; }
+    .section-label {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 0.6rem;
+    }
+    .section-label::after {
+      content: ''; flex: 1; max-width: 3rem; height: 1px; background: var(--sage-light);
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 2.8rem);
+      font-weight: 700; margin-bottom: 3rem;
+      line-height: 1.15;
+    }
+    hr.divider {
+      border: none; border-top: 1px solid var(--rule);
+      margin: 0 6rem;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--cream); }
+    .exp-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+    .exp-card {
+      background: white; border-radius: 12px;
+      padding: 1.75rem;
+      border: 1px solid var(--rule);
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative; overflow: hidden;
+    }
+    .exp-card::before {
+      content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; background: var(--sage-light);
+      transition: background 0.2s;
+    }
+    .exp-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.07); }
+    .exp-card:hover::before { background: var(--sage-dark); }
+    .exp-org {
+      font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--sage);
+      margin-bottom: 0.4rem;
+    }
+    .exp-role {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+    .exp-date {
+      font-size: 0.78rem; color: var(--ink-soft);
+      margin-bottom: 0.85rem;
+    }
+    .exp-desc {
+      font-size: 0.88rem; color: var(--ink-soft);
+      line-height: 1.7;
+    }
+    .exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+    .exp-tag {
+      font-size: 0.7rem; padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      background: rgba(122,158,126,0.1);
+      color: var(--sage-dark);
+    }
+
+    /* ── EDUCATION & AWARDS ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .award-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .award-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+      padding: 1rem 1.2rem;
+      border-radius: 8px;
+      border: 1px solid var(--rule);
+      background: white;
+      transition: border-color 0.2s;
+    }
+    .award-item:hover { border-color: var(--sage-light); }
+    .award-icon {
+      font-size: 1.2rem; flex-shrink: 0; margin-top: 0.1rem;
+    }
+    .award-text { font-size: 0.9rem; line-height: 1.55; color: var(--ink-soft); }
+    .award-text strong { color: var(--ink); display: block; margin-bottom: 0.1rem; }
+
+    .edu-card {
+      background: var(--sage-dark); color: white;
+      border-radius: 16px; padding: 2.5rem;
+      position: relative; overflow: hidden;
+    }
+    .edu-card::after {
+      content: 'UC Berkeley';
+      position: absolute; right: -1.5rem; bottom: -1rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem; font-weight: 700;
+      opacity: 0.08; white-space: nowrap;
+      pointer-events: none;
+    }
+    .edu-school {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .edu-degree {
+      font-size: 0.9rem; opacity: 0.8; margin-bottom: 1.5rem; line-height: 1.6;
+    }
+    .edu-details { display: flex; flex-direction: column; gap: 0.5rem; }
+    .edu-detail {
+      font-size: 0.82rem; opacity: 0.75;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .edu-detail::before { content: '→'; opacity: 0.5; }
+
+    /* ── PAPERS / PRESENTATIONS ── */
+    #papers { background: var(--cream); }
+    .papers-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .paper-card {
+      background: white; border-radius: 12px;
+      padding: 0;
+      border: 1px solid var(--rule);
+      display: flex; flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+      overflow: hidden;
+    }
+    .paper-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.07); }
+    .paper-preview {
+      width: 100%; height: 180px;
+      border: none; border-bottom: 1px solid var(--rule);
+      background: var(--cream);
+      display: block;
+      pointer-events: none;
+    }
+    .paper-body { padding: 1.25rem; display: flex; flex-direction: column; flex: 1; }
+    .paper-type {
+      font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; margin-bottom: 0.75rem;
+      display: inline-flex; align-items: center; gap: 0.4rem;
+    }
+    .paper-type.presentation { color: var(--sage-dark); }
+    .paper-type.paper { color: var(--accent); }
+    .paper-type-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: currentColor;
+    }
+    .paper-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 700;
+      line-height: 1.35; margin-bottom: 0.5rem;
+      flex: 1;
+    }
+    .paper-course {
+      font-size: 0.8rem; color: var(--ink-soft);
+      margin-bottom: 0.4rem;
+    }
+    .paper-date {
+      font-size: 0.75rem; color: var(--sage);
+      font-weight: 500;
+    }
+    .paper-add-prompt {
+      border: 2px dashed var(--sage-light);
+      border-radius: 12px; padding: 2.5rem;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; color: var(--sage);
+      font-size: 0.85rem;
+    }
+    .paper-add-prompt span { font-size: 1.5rem; margin-bottom: 0.5rem; }
+
+    /* ── CONNECT ── */
+    #connect {
+      text-align: center;
+      background: var(--ink);
+      color: white;
+      padding: 6rem;
+    }
+    #connect .section-label { justify-content: center; color: var(--sage-light); }
+    #connect .section-label::after { display: none; }
+    #connect h2 { color: white; margin-bottom: 1rem; }
+    #connect p {
+      font-size: 1rem; color: rgba(255,255,255,0.6);
+      max-width: 480px; margin: 0 auto 2.5rem;
+    }
+    .connect-links {
+      display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .connect-link {
+      text-decoration: none; font-size: 0.82rem;
+      font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.75rem 1.75rem; border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .connect-link.primary {
+      background: var(--sage); color: white;
+    }
+    .connect-link.primary:hover { background: var(--sage-dark); }
+    .connect-link.outline {
+      border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.7);
+    }
+    .connect-link.outline:hover { border-color: white; color: white; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); color: rgba(255,255,255,0.3);
+      text-align: center; padding: 1.5rem;
+      font-size: 0.78rem; border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0; transform: translateY(20px);
+      animation: fadeUp 0.7s ease forwards;
+    }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .fade-in:nth-child(1) { animation-delay: 0.1s; }
+    .fade-in:nth-child(2) { animation-delay: 0.2s; }
+    .fade-in:nth-child(3) { animation-delay: 0.3s; }
+    .fade-in:nth-child(4) { animation-delay: 0.4s; }
+
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { gap: 1.2rem; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 5rem 2rem 2rem; }
+      .hero-right { padding: 2rem; }
+      section { padding: 4rem 2rem; }
+      hr.divider { margin: 0 2rem; }
+      .two-col { grid-template-columns: 1fr; gap: 2rem; }
+      #connect { padding: 4rem 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <div class="nav-name">Olivia Taylor-Gao</div>
+      <ul class="nav-links">
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#papers">Papers</a></li>
+        <li><a href="#resume">Résumé</a></li>
+        <li><a href="#connect">Connect</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-left">
+      <div class="hero-tag fade-in">She/Her · San Jose, CA</div>
+      <h1 class="fade-in">Olivia<br><em>Taylor-Gao</em></h1>
+      <p class="hero-bio fade-in">
+        Environmental economist, cognitive science researcher, and startup founder at UC Berkeley — driven by the intersection of sustainability, technology, and human behavior.
+      </p>
+      <div class="fade-in" style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span style="font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: white; background: var(--sage-dark); padding: 0.2rem 0.55rem; border-radius: 4px;">BS</span>
+          <span style="font-size: 0.95rem; color: var(--ink); font-weight: 500;">Environmental Economics & Policy</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span style="font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: white; background: var(--sage-dark); padding: 0.2rem 0.55rem; border-radius: 4px;">BS</span>
+          <span style="font-size: 0.95rem; color: var(--ink); font-weight: 500;">Cognitive Science</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span style="font-size: 0.65rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: white; background: var(--accent); padding: 0.2rem 0.35rem; border-radius: 4px;">Minor</span>
+          <span style="font-size: 0.95rem; color: var(--ink); font-weight: 500;">Sustainable Business & Policy</span>
+        </div>
+      </div>
+      <div class="hero-cta fade-in">
+        <a href="#connect" class="btn btn-primary">Get in touch</a>
+        <a href="https://www.linkedin.com/in/olivia-taylor-gao/" target="_blank" class="btn btn-ghost">LinkedIn</a>
+      </div>
+    </div>
+
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-label">Work & Leadership</div>
+    <h2>Experience</h2>
+    <div class="exp-grid">
+
+      <div class="exp-card">
+        <div class="exp-org">Intuitive Surgical</div>
+        <div class="exp-role">Environmental Compliance Intern</div>
+        <div class="exp-date">May 2025 – Aug 2025 · Sunnyvale, CA</div>
+        <div class="exp-desc">Performed climate risk analysis for multiple sites and produced process documentation for compliance with California and European climate disclosure laws. Conducted grid greening analyses and evaluated renewable energy integration opportunities.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Climate Risk</span>
+          <span class="exp-tag">Compliance</span>
+          <span class="exp-tag">Data Analysis</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-org">Rooh</div>
+        <div class="exp-role">Co-Founder → Founding Advisor</div>
+        <div class="exp-date">Jan 2025 – Present · Berkeley, CA</div>
+        <div class="exp-desc">Co-founded an AI-driven communication platform providing real-time feedback on public speaking and interpersonal skills. Selected for Berkeley SkyDeck Pad-13 and Google Startups program. Designed product vision and UX around vocal imitation and engagement metrics.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">AI / ML</span>
+          <span class="exp-tag">Product Design</span>
+          <span class="exp-tag">SkyDeck</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-org">Berkeley Student Cooperative</div>
+        <div class="exp-role">Board Member</div>
+        <div class="exp-date">Apr 2025 – Present · Berkeley, CA</div>
+        <div class="exp-desc">Serve on the board of a nonprofit generating $15M+ in annual revenue with $200M+ in assets. Develop proposals to improve financial efficiency through cost reduction and operational optimization.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Governance</span>
+          <span class="exp-tag">Finance</span>
+          <span class="exp-tag">Nonprofit</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-org">UC Berkeley · Rausser College</div>
+        <div class="exp-role">Research Assistant</div>
+        <div class="exp-date">Feb 2025 – May 2025 · Berkeley, CA</div>
+        <div class="exp-desc">Researched and analyzed the emerging biodiversity credit market, comparing market-based approaches to conservation and evaluating measurement frameworks for long-term outcomes.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Biodiversity</span>
+          <span class="exp-tag">Market Research</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-org">NewBeex</div>
+        <div class="exp-role">Market Research & Business Development</div>
+        <div class="exp-date">Sep 2024 – May 2025 · Berkeley, CA</div>
+        <div class="exp-desc">Designed the website and landing page for a community-building platform. Conducted user interviews and market research, leveraging insights to enhance platform features and user onboarding.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">UX Research</span>
+          <span class="exp-tag">Web Design</span>
+          <span class="exp-tag">Growth</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-org">Echandia</div>
+        <div class="exp-role">Business Development Intern</div>
+        <div class="exp-date">Dec 2023 – May 2024 · Remote (Sweden HQ)</div>
+        <div class="exp-desc">Researched trade legislation (TAA, BABA) to support U.S. market entry. Identified 50+ manufacturing facilities and 15+ grant opportunities. Co-authored a Washington Governor's Office press release for Echandia's U.S. manufacturing announcement.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Policy Research</span>
+          <span class="exp-tag">Market Entry</span>
+          <span class="exp-tag">Clean Energy</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-org">BSLA</div>
+        <div class="exp-role">Alumni Fellow</div>
+        <div class="exp-date">Jun 2024 – Present · Berkeley, CA</div>
+        <div class="exp-desc">Presented workshops on Time Management and Communications/Branding to 100+ incoming Academy members. Spotlight speaker, Fall 2025. Previously served on the Advisory Board, shaping program direction.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Leadership</span>
+          <span class="exp-tag">Public Speaking</span>
+          <span class="exp-tag">Mentoring</span>
+        </div>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-org">UC Berkeley Housing & Dining</div>
+        <div class="exp-role">Sustainability Intern</div>
+        <div class="exp-date">Aug 2023 – Dec 2023 · Berkeley, CA</div>
+        <div class="exp-desc">Implemented campus sustainability initiatives reaching 1,000+ students. Conducted waste audits, student surveys, and co-created sustainability training content for 100+ dining staff.</div>
+        <div class="exp-tags">
+          <span class="exp-tag">Sustainability</span>
+          <span class="exp-tag">Community Engagement</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- EDUCATION + AWARDS -->
+  <section id="education">
+    <div class="section-label">Academic Background</div>
+    <h2>Education & Awards</h2>
+    <div class="two-col">
+
+      <div class="edu-card">
+        <div class="edu-school">UC Berkeley</div>
+        <div class="edu-degree">
+          BS Environmental Economics & Policy<br>
+          BS Cognitive Science<br>
+          Minor: Sustainable Business & Policy
+        </div>
+        <div class="edu-details">
+          <div class="edu-detail">Expected May 2027</div>
+          <div class="edu-detail">SkyDeck Pad-13 · Google Startups</div>
+          <div class="edu-detail">BSLA Certificate</div>
+          <div class="edu-detail">Coursera: Project Management, AI, Excel</div>
+        </div>
+      </div>
+
+      <ul class="award-list">
+        <li class="award-item">
+          <div class="award-text">
+            <strong>1st Place · UEA Case Competition 2025</strong>
+            Berkeley Undergraduate Economics Association
+          </div>
+        </li>
+        <li class="award-item">
+          <div class="award-text">
+            <strong>Runner-Up · Girls Into VC Pitch Competition</strong>
+            UC Berkeley
+          </div>
+        </li>
+        <li class="award-item">
+          <div class="award-text">
+            <strong>1st Place · EGAL Case Competition 2024</strong>
+            Innovation &amp; Entrepreneurship Inclusion, team of 4
+          </div>
+        </li>
+        <li class="award-item">
+          <div class="award-text">
+            <strong>Silver Tier Innovation Fellow · SCET</strong>
+            Ranked 9th of 51 fellows, Fall 2024
+          </div>
+        </li>
+        <li class="award-item">
+          <div class="award-text">
+            <strong>2nd Place · International Protégé Competition 2022</strong>
+            Opera Singer category
+          </div>
+        </li>
+      </ul>
+
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- PAPERS & PRESENTATIONS -->
+  <section id="papers">
+    <div class="section-label">Academic Work</div>
+    <h2>Papers & Presentations</h2>
+    <div class="papers-grid">
+
+      <div class="paper-card">
+        <iframe class="paper-preview" src="https://docs.google.com/document/d/1Kff265OpKLXg4Et32IttsFMobN8GcmoBD15nrSRAvhk/preview" loading="lazy"></iframe>
+        <div class="paper-body">
+          <div class="paper-type paper"><span class="paper-type-dot"></span> Research Paper</div>
+          <div class="paper-title">Comparing Food Loss Between High Income and Low Income Countries</div>
+          <div class="paper-course">EnvEcon 141 · UC Berkeley</div>
+          <div class="paper-date" style="margin-bottom: 0.75rem;">May 2026</div>
+          <a href="https://docs.google.com/document/d/1Kff265OpKLXg4Et32IttsFMobN8GcmoBD15nrSRAvhk/edit?usp=sharing" target="_blank" style="font-size: 0.75rem; color: var(--sage-dark); text-decoration: none; font-weight: 500;">View paper →</a>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <iframe class="paper-preview" src="https://docs.google.com/presentation/d/1--uwrpOQ2yycO-rgSRnkkf4tvkXttSdhklCEx0o7c5M/embed?start=false&loop=false&slide=id.p" loading="lazy"></iframe>
+        <div class="paper-body">
+          <div class="paper-type presentation"><span class="paper-type-dot"></span> Presentation</div>
+          <div class="paper-title">Improving CFS: Lowering Costs and Improving the Experience</div>
+          <div class="paper-course">Berkeley Student Cooperative · Board Proposal</div>
+          <div class="paper-date" style="margin-bottom: 0.75rem;">2025</div>
+          <a href="https://docs.google.com/presentation/d/1--uwrpOQ2yycO-rgSRnkkf4tvkXttSdhklCEx0o7c5M/edit?usp=sharing" target="_blank" style="font-size: 0.75rem; color: var(--sage-dark); text-decoration: none; font-weight: 500;">View slides →</a>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <iframe class="paper-preview" src="https://docs.google.com/presentation/d/14mVXREH3350cmIiHSGGK8obzxw1fBRzbOHX4IpwsCBY/embed?start=false&loop=false&slide=id.p" loading="lazy"></iframe>
+        <div class="paper-body">
+          <div class="paper-type presentation"><span class="paper-type-dot"></span> Pitch Deck</div>
+          <div class="paper-title">Project Elevate</div>
+          <div class="paper-course">Entrepreneurship · UC Berkeley</div>
+          <div class="paper-date" style="margin-bottom: 0.75rem;">2024</div>
+          <a href="https://docs.google.com/presentation/d/14mVXREH3350cmIiHSGGK8obzxw1fBRzbOHX4IpwsCBY/edit?usp=sharing" target="_blank" style="font-size: 0.75rem; color: var(--sage-dark); text-decoration: none; font-weight: 500;">View slides →</a>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <iframe class="paper-preview" src="https://docs.google.com/presentation/d/1C2TWjWUOeFWQy1QQXhecCJcd_xKxlIehnd0FJu3q2lc/embed?start=false&loop=false&slide=id.p" loading="lazy"></iframe>
+        <div class="paper-body">
+          <div class="paper-type paper"><span class="paper-type-dot"></span> Research Poster</div>
+          <div class="paper-title">Evaluating Tokyo's Cap-and-Trade Emissions Trading System</div>
+          <div class="paper-course">Climate Change Economics · UC Berkeley</div>
+          <div class="paper-date" style="margin-bottom: 0.75rem;">2025</div>
+          <a href="https://docs.google.com/presentation/d/1C2TWjWUOeFWQy1QQXhecCJcd_xKxlIehnd0FJu3q2lc/edit?usp=sharing" target="_blank" style="font-size: 0.75rem; color: var(--sage-dark); text-decoration: none; font-weight: 500;">View poster →</a>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <iframe class="paper-preview" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Fdeck%2F2TlaQHQkm61IyremQxcNb9" loading="lazy"></iframe>
+        <div class="paper-body">
+          <div class="paper-type presentation"><span class="paper-type-dot"></span> Design Project</div>
+          <div class="paper-title">Bilt — Tech & City</div>
+          <div class="paper-course">Product Design · UC Berkeley</div>
+          <div class="paper-date" style="margin-bottom: 0.75rem;">2025</div>
+          <a href="https://www.figma.com/deck/2TlaQHQkm61IyremQxcNb9/Bilt---Tech---City?node-id=143-11&t=bHZQuF2lgg89Oqud-1" target="_blank" style="font-size: 0.75rem; color: var(--sage-dark); text-decoration: none; font-weight: 500;">View deck →</a>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <iframe class="paper-preview" src="https://www.canva.com/design/p6bj9rrpe1vfs0b/view?embed" loading="lazy"></iframe>
+        <div class="paper-body">
+          <div class="paper-type presentation"><span class="paper-type-dot"></span> Presentation</div>
+          <div class="paper-title">Canva Presentation I</div>
+          <div class="paper-course">UC Berkeley</div>
+          <div class="paper-date" style="margin-bottom: 0.75rem;">2025</div>
+          <a href="https://canva.link/p6bj9rrpe1vfs0b" target="_blank" style="font-size: 0.75rem; color: var(--sage-dark); text-decoration: none; font-weight: 500;">View slides →</a>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <iframe class="paper-preview" src="https://www.canva.com/design/amh8y1z44vo3lzc/view?embed" loading="lazy"></iframe>
+        <div class="paper-body">
+          <div class="paper-type presentation"><span class="paper-type-dot"></span> Presentation</div>
+          <div class="paper-title">Canva Presentation II</div>
+          <div class="paper-course">UC Berkeley</div>
+          <div class="paper-date" style="margin-bottom: 0.75rem;">2025</div>
+          <a href="https://canva.link/amh8y1z44vo3lzc" target="_blank" style="font-size: 0.75rem; color: var(--sage-dark); text-decoration: none; font-weight: 500;">View slides →</a>
+        </div>
+      </div>
+
+      <div class="paper-card">
+        <iframe class="paper-preview" src="https://www.canva.com/design/ibhi8rkc21rglsz/view?embed" loading="lazy"></iframe>
+        <div class="paper-body">
+          <div class="paper-type presentation"><span class="paper-type-dot"></span> Presentation</div>
+          <div class="paper-title">Canva Presentation III</div>
+          <div class="paper-course">UC Berkeley</div>
+          <div class="paper-date" style="margin-bottom: 0.75rem;">2025</div>
+          <a href="https://canva.link/ibhi8rkc21rglsz" target="_blank" style="font-size: 0.75rem; color: var(--sage-dark); text-decoration: none; font-weight: 500;">View slides →</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- RESUME -->
+  <section id="resume">
+    <div class="section-label">Full Background</div>
+    <h2>Résumé</h2>
+
+    <!-- Education -->
+    <div style="margin-bottom: 3rem;">
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 1.25rem; color: var(--sage-dark); border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem;">Education</h3>
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem;">
+        <div>
+          <div style="font-weight: 500; font-size: 1rem;">University of California, Berkeley</div>
+          <div style="font-size: 0.9rem; color: var(--ink-soft); margin-top: 0.2rem;">BS Environmental Economics & Policy &nbsp;·&nbsp; BS Cognitive Science &nbsp;·&nbsp; Minor: Sustainable Business & Policy</div>
+          <div style="font-size: 0.85rem; color: var(--sage); margin-top: 0.3rem;">Expected May 2027</div>
+        </div>
+        <div style="font-size: 0.85rem; color: var(--ink-soft); white-space: nowrap;">Aug 2023 – May 2027</div>
+      </div>
+      <div style="margin-top: 0.85rem; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.75;">
+        <div><span style="color: var(--ink); font-weight: 500;">Coursework:</span> Computational Structures in Data Science, Psychology & Economics, Applied Econometrics, Principles of Business, Intermediate Microeconomics with Applications to Sustainability</div>
+        <div style="margin-top: 0.4rem;"><span style="color: var(--ink); font-weight: 500;">Certifications:</span> BSLA Certificate, Berkeley SkyDeck Certificate &nbsp;·&nbsp; Coursera: Foundations of Project Management, AI Fundamentals, Work Smarter with Microsoft Excel</div>
+      </div>
+    </div>
+
+    <!-- Work Experience -->
+    <div style="margin-bottom: 3rem;">
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 1.25rem; color: var(--sage-dark); border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem;">Work Experience</h3>
+      <div style="display: flex; flex-direction: column; gap: 1.75rem;">
+
+        <div>
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.25rem;">
+            <div style="font-weight: 500;">Intuitive Surgical — Environmental Compliance Intern</div>
+            <div style="font-size: 0.85rem; color: var(--ink-soft);">May 2025 – Aug 2025</div>
+          </div>
+          <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.8;">
+            <li>Performed climate risk analysis for multiple sites; created process documentation for California and European climate disclosure compliance.</li>
+            <li>Conducted grid greening analyses and evaluated renewable energy integration opportunities.</li>
+            <li>Ensured MDR compliance by creating records for audit readiness and regulatory reporting.</li>
+          </ul>
+        </div>
+
+        <div>
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.25rem;">
+            <div style="font-weight: 500;">Rooh — Co-Founder / Founding Advisor</div>
+            <div style="font-size: 0.85rem; color: var(--ink-soft);">Jan 2025 – Present</div>
+          </div>
+          <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.8;">
+            <li>AI-driven communication platform for real-time public speaking and interpersonal feedback. Selected for Berkeley SkyDeck Pad-13 and Google Startups program.</li>
+            <li>Designed product vision and UX around vocal imitation, audience engagement metrics, and timeline-based feedback.</li>
+          </ul>
+        </div>
+
+        <div>
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.25rem;">
+            <div style="font-weight: 500;">UC Berkeley, Rausser College — Research Assistant</div>
+            <div style="font-size: 0.85rem; color: var(--ink-soft);">Feb 2025 – May 2025</div>
+          </div>
+          <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.8;">
+            <li>Analyzed the emerging biodiversity credit market, comparing crediting schemes and evaluating measurement frameworks.</li>
+          </ul>
+        </div>
+
+        <div>
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.25rem;">
+            <div style="font-weight: 500;">NewBeex — Market Research & Business Development</div>
+            <div style="font-size: 0.85rem; color: var(--ink-soft);">Sep 2024 – May 2025</div>
+          </div>
+          <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.8;">
+            <li>Designed the website and landing page for a community-building platform.</li>
+            <li>Conducted user interviews and market research to enhance platform features and onboarding.</li>
+          </ul>
+        </div>
+
+        <div>
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.25rem;">
+            <div style="font-weight: 500;">SCET, UC Berkeley — Student Innovation Fellow</div>
+            <div style="font-size: 0.85rem; color: var(--ink-soft);">Aug 2024 – Nov 2024</div>
+          </div>
+          <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.8;">
+            <li>Ranked 9th of 51 fellows; earned Silver Tier status. Built startup strategies through competitive workshops and industry mentorship.</li>
+          </ul>
+        </div>
+
+        <div>
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.25rem;">
+            <div style="font-weight: 500;">UC Berkeley, Rausser College — Research Assistant</div>
+            <div style="font-size: 0.85rem; color: var(--ink-soft);">May 2024 – Aug 2024</div>
+          </div>
+          <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.8;">
+            <li>Coded 50+ oral history interviews on the East Coast fishing industry; synthesized data on climate adaptation, moral economies, and resource conflicts.</li>
+          </ul>
+        </div>
+
+        <div>
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.25rem;">
+            <div style="font-weight: 500;">Echandia — Business Development Intern</div>
+            <div style="font-size: 0.85rem; color: var(--ink-soft);">Dec 2023 – May 2024</div>
+          </div>
+          <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.8;">
+            <li>Researched TAA and BABA legislation for U.S. market entry; identified 50+ manufacturing facilities and 15+ grant opportunities.</li>
+            <li>Co-authored a press release with the Washington Governor's Office announcing Echandia's U.S. manufacturing plans.</li>
+          </ul>
+        </div>
+
+        <div>
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.25rem;">
+            <div style="font-weight: 500;">UC Berkeley Housing & Dining — Sustainability Intern</div>
+            <div style="font-size: 0.85rem; color: var(--ink-soft);">Aug 2023 – Dec 2023</div>
+          </div>
+          <ul style="margin-top: 0.5rem; padding-left: 1.25rem; font-size: 0.88rem; color: var(--ink-soft); line-height: 1.8;">
+            <li>Implemented sustainability initiatives for 1,000+ students; conducted waste audits and co-created training content for 100+ staff.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Leadership -->
+    <div style="margin-bottom: 3rem;">
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 1.25rem; color: var(--sage-dark); border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem;">Leadership</h3>
+      <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+
+        <div>
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.25rem;">
+            <div style="font-weight: 500;">Berkeley Student Cooperative — Board Member</div>
+            <div style="font-size: 0.85rem; color: var(--ink-soft);">Apr 2025 – Present</div>
+          </div>
+          <div style="font-size: 0.88rem; color: var(--ink-soft); margin-top: 0.4rem; line-height: 1.7;">Serve on the board of a nonprofit with $15M+ revenue and $200M+ in assets; developed proposals for financial efficiency and operational optimization.</div>
+        </div>
+
+        <div>
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.25rem;">
+            <div style="font-weight: 500;">BSLA — Alumni Fellow</div>
+            <div style="font-size: 0.85rem; color: var(--ink-soft);">Jun 2024 – Present</div>
+          </div>
+          <div style="font-size: 0.88rem; color: var(--ink-soft); margin-top: 0.4rem; line-height: 1.7;">Presented workshops on Time Management and Branding for 100+ incoming members. Spotlight speaker, Fall 2025. Previously served on the Advisory Board.</div>
+        </div>
+
+        <div>
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.25rem;">
+            <div style="font-weight: 500;">BEEPS — Secretary / Internal Vice President</div>
+            <div style="font-size: 0.85rem; color: var(--ink-soft);">May 2024 – Present</div>
+          </div>
+          <div style="font-size: 0.88rem; color: var(--ink-soft); margin-top: 0.4rem; line-height: 1.7;">Organized events and relaunched the club website. Marketed academic events to 400+ members via Instagram, email, and Slack.</div>
+        </div>
+
+        <div>
+          <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.25rem;">
+            <div style="font-weight: 500;">Berkeley Student Cooperative — Academic Coordinator</div>
+            <div style="font-size: 0.85rem; color: var(--ink-soft);">Jun 2024 – May 2025</div>
+          </div>
+          <div style="font-size: 0.88rem; color: var(--ink-soft); margin-top: 0.4rem; line-height: 1.7;">Hosted professor guest speakers and the first-ever networking event at Cloyne, connecting students with alumni. Created the Cloyne Academic Resources Newsletter.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Awards -->
+    <div>
+      <h3 style="font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 1.25rem; color: var(--sage-dark); border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem;">Awards & Honors</h3>
+      <ul style="padding-left: 1.25rem; font-size: 0.88rem; color: var(--ink-soft); line-height: 2;">
+        <li>1st Place — UEA Case Competition, 2025</li>
+        <li>Runner-Up — Girls Into VC @ Berkeley Summit Pitch Competition</li>
+        <li>1st Place — Berkeley EGAL Case Competition, Spring 2024 (team of 4)</li>
+        <li>Silver Tier — SCET Student Innovation Fellow, Fall 2024 (ranked 9th of 51)</li>
+        <li>2nd Place — International Protégé Competition, Opera Singer category, 2022</li>
+      </ul>
+    </div>
+
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- CONNECT -->
+  <section id="connect">
+    <div class="section-label">Get in Touch</div>
+    <h2>Let's Connect</h2>
+    <p>Open to research collaborations, internship opportunities, and conversations about sustainability, entrepreneurship, or cognitive science.</p>
+    <div class="connect-links">
+      <a href="mailto:olivia2000s@berkeley.edu" class="connect-link primary">Email Me</a>
+      <a href="https://www.linkedin.com/in/olivia-taylor-gao/" target="_blank" class="connect-link outline">LinkedIn</a>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Olivia Taylor-Gao · Built with HTML & CSS
+  </footer>
+
+  <script>
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    });
+  </script>
+</body>
+</html>
