@@ -864,7 +864,9 @@
   </nav>
 
   <!-- HERO -->
-  <section id="home">
+  <section id="home" style="position:relative;">
+    <canvas id="heroCanvas" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;"></canvas>
+    <div style="position:relative;z-index:1;display:contents;">
     <div class="hero-eyebrow">
       <span class="grad-text">&#9632;</span> She/Her &nbsp;·&nbsp; San Francisco Bay Area &nbsp;·&nbsp; UC Berkeley
     </div>
@@ -881,6 +883,7 @@
 
     </div>
 
+    </div>
   </section>
 
   <!-- EDUCATION -->
@@ -1307,11 +1310,11 @@
         </div>
         <!-- Clickable pill row -->
         <div style="display:flex; gap:0.5rem; flex-wrap:wrap; padding:1rem 1.75rem; border-top:1px solid var(--rule); background:var(--cream);">
-          <button onclick="selectWaveDot('Music')"      class="wave-btn" data-color="#5d8fa3">Music</button>
+          <button onclick="selectWaveDot('Music')"     class="wave-btn" data-color="#5d8fa3">Music</button>
           <button onclick="selectWaveDot('Hiking')"    class="wave-btn" data-color="#607a6e">Hiking</button>
-          <button onclick="selectWaveDot('Knowledge')" class="wave-btn" data-color="#68607e">Knowledge</button>
+          <button onclick="selectWaveDot('Curiosity')" class="wave-btn" data-color="#68607e">Curiosity</button>
           <button onclick="selectWaveDot('Travel')"    class="wave-btn" data-color="#5d8fa3">Travel</button>
-          <button onclick="selectWaveDot('The World')" class="wave-btn" data-color="#607a6e">The World</button>
+          <button onclick="selectWaveDot('Nature')"    class="wave-btn" data-color="#607a6e">Nature</button>
         </div>
       </div>
 
@@ -1390,7 +1393,7 @@
               </div>
               <div class="vol-back">
                 <div style="font-family:var(--mono); font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:#5d8fa3; margin-bottom:0.75rem;">What I did</div>
-                <div style="font-size:0.875rem; color:var(--ink-mid); line-height:1.7; flex:1;">Managed website and email communications, ensuring timely outreach to 400+ members across Instagram, email, and Slack.</div>
+                <div style="font-size:0.875rem; color:var(--ink-mid); line-height:1.7; flex:1;">Managed website & email outreach to 400+ members across Instagram, email, and Slack.</div>
               </div>
             </div>
           </div>
@@ -1407,7 +1410,7 @@
               </div>
               <div class="vol-back">
                 <div style="font-family:var(--mono); font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:#5d8fa3; margin-bottom:0.75rem;">What I did</div>
-                <div style="font-size:0.875rem; color:var(--ink-mid); line-height:1.7; flex:1;">Facilitated guest speaker sessions (Khalid Kadir, Peyrin Kao), coordinated 3 alumni networking events, and created the Cloyne Academic Resources Newsletter for 100+ members.</div>
+                <div style="font-size:0.875rem; color:var(--ink-mid); line-height:1.7; flex:1;">Facilitated guest speakers, coordinated alumni events, and created the Cloyne Academic Newsletter.</div>
               </div>
             </div>
           </div>
@@ -1424,7 +1427,7 @@
               </div>
               <div class="vol-back">
                 <div style="font-family:var(--mono); font-size:0.58rem; letter-spacing:0.1em; text-transform:uppercase; color:#5d8fa3; margin-bottom:0.75rem;">What I did</div>
-                <div style="font-size:0.875rem; color:var(--ink-mid); line-height:1.7; flex:1;">Self-managed street performer in the San Francisco Bay Area. Collaborated with a guitarist to deliver live performances.</div>
+                <div style="font-size:0.875rem; color:var(--ink-mid); line-height:1.7; flex:1;">Self-managed street performer in the San Francisco Bay Area. Collaborated with a guitarist to deliver live performances tailored to crowd dynamics and engagement. Demonstrated entrepreneurial initiative by strategically selecting high-traffic locations and optimizing performance timing. Curated a diverse, multi-genre repertoire, showcasing adaptability, audience awareness, and a passion for music.</div>
               </div>
             </div>
           </div>
@@ -1441,24 +1444,28 @@
   </section>
 
   <!-- RÉSUMÉ -->
-  <section id="resume" style="padding: 3rem 2.5rem; border-bottom: 1px solid var(--rule);">
-    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1.5rem; margin-bottom:2rem;">
-      <div style="display:flex; align-items:baseline; gap:1.5rem;">
-        <span style="font-family:var(--mono); font-size:0.65rem; color:#415a77; letter-spacing:0.1em;">08</span>
-        <h2 style="font-family:var(--serif); font-size:clamp(1.4rem,2.5vw,2rem); font-weight:400; letter-spacing:-0.02em;">Full <em>Résumé</em></h2>
-      </div>
-      <a href="https://raw.githubusercontent.com/olivia2000s/olivia2000s.github.io/main/Olivia_Taylor-Gao_Spring_2026_Resume___docx__6_.pdf" download="Olivia_Taylor-Gao_Resume.pdf"
+  <section id="resume" style="padding: 3rem 2.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:2rem; border-bottom: 1px solid var(--rule);">
+    <div style="display:flex; align-items:baseline; gap:1.5rem;">
+      <span style="font-family:var(--mono); font-size:0.65rem; color:#415a77; letter-spacing:0.1em;">08</span>
+      <h2 style="font-family:var(--serif); font-size:clamp(1.4rem,2.5vw,2rem); font-weight:400; letter-spacing:-0.02em;">Full <em>Résumé</em></h2>
+    </div>
+    <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+      <a href="https://docs.google.com/document/d/1KK_oxYFoGd-mHS-DHfHx6iTZTOHR345T/edit?usp=sharing" target="_blank"
+         style="font-family:var(--mono); font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase;
+                color:var(--bg); background:var(--ink); text-decoration:none;
+                padding:0.85rem 2rem; border-radius:3px; transition:opacity 0.2s;
+                display:inline-flex; align-items:center; gap:0.6rem;"
+         onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+        View Résumé ↗
+      </a>
+      <a href="https://docs.google.com/document/d/1KK_oxYFoGd-mHS-DHfHx6iTZTOHR345T/export?format=pdf"
          style="font-family:var(--mono); font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase;
                 color:var(--ink); text-decoration:none; border:1px solid rgba(17,16,16,0.2);
-                padding:0.75rem 1.75rem; border-radius:3px; transition:background 0.2s, color 0.2s;"
+                padding:0.85rem 2rem; border-radius:3px; transition:background 0.2s, color 0.2s;"
          onmouseover="this.style.background='var(--cream)'" onmouseout="this.style.background='transparent'">
         Download PDF ↓
       </a>
     </div>
-    <iframe src="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/olivia2000s/olivia2000s.github.io/main/Olivia_Taylor-Gao_Spring_2026_Resume___docx__6_.pdf&embedded=true"
-            style="width:100%; height:800px; border:1px solid var(--rule); border-radius:8px; display:block;"
-            title="Olivia Taylor-Gao Resume">
-    </iframe>
   </section>
 
   <!-- CONNECT -->
@@ -1500,7 +1507,7 @@
       <div class="pdf-modal-bar">
         <div class="pdf-modal-title">Tokyo Cap-and-Trade ETS — Poster</div>
         <div class="pdf-modal-actions">
-          <a id="posterDownload" download="Tokyo_ETS_Research_Poster.pdf" class="pdf-dl-btn">Download</a>
+          <a id="posterDownload" download="Climate_Change_Economics_Final_Poster.pdf" class="pdf-dl-btn">Download</a>
           <button onclick="closeModal('posterModal','posterFrame')" class="pdf-close-btn">✕</button>
         </div>
       </div>
@@ -1565,11 +1572,11 @@
       var activeDot = null;
 
       var dots = [
-        { label: 'Music',     x: 0.10, color: '#5d8fa3', desc: 'Music is one of my great passions in life.' },
+        { label: 'Music',     x: 0.10, color: '#5d8fa3', desc: 'Always have something playing. Music is a constant — whether working, hiking, or just existing.' },
         { label: 'Hiking',    x: 0.28, color: '#607a6e', desc: 'Love hiking around and exploring new trails.' },
-        { label: 'Knowledge', x: 0.50, color: '#68607e', desc: 'I enjoy the pursuit of knowledge.' },
+        { label: 'Curiosity', x: 0.50, color: '#68607e', desc: 'Like to learn new things — always asking questions and diving into whatever feels interesting.' },
         { label: 'Travel',    x: 0.70, color: '#5d8fa3', desc: 'Drawn to new places, cultures, and the perspectives that come with them.' },
-        { label: 'The World', x: 0.90, color: '#607a6e', desc: 'The world is complex and constantly evolving, which is why I\'m drawn to learning about people, societies, and the ideas that shape our lives.' },
+        { label: 'Nature',    x: 0.90, color: '#607a6e', desc: 'Like to be in nature — it clears my head and keeps me grounded.' },
       ];
 
       var waves = [
@@ -1788,7 +1795,7 @@
     }
     function getPosterBlob() {
       if (_posterBlob) return Promise.resolve(_posterBlob);
-      return fetch('Tokyo_ETS_Research_Poster.pdf').then(function(r){return r.blob();}).then(function(b){_posterBlob=URL.createObjectURL(b);return _posterBlob;});
+      return fetch('Climate_Change_Economics_Final_Poster.pdf').then(function(r){return r.blob();}).then(function(b){_posterBlob=URL.createObjectURL(b);return _posterBlob;});
     }
     function getEepBlob() {
       if (_eepBlob) return Promise.resolve(_eepBlob);
@@ -1841,6 +1848,88 @@
         a.classList.toggle('active', a.getAttribute('href') === '#' + current);
       });
     });
+  </script>
+
+  <script>
+    // Hero starry animation
+    (function(){
+      var canvas = document.getElementById('heroCanvas');
+      if(!canvas) return;
+      function init(){
+        canvas.width = canvas.offsetWidth;
+        canvas.height = canvas.offsetHeight;
+        var W = canvas.width, H = canvas.height;
+        var ctx = canvas.getContext('2d');
+        function inTextZone(x,y){ return x < W*0.62 && y > H*0.48; }
+        var stars = [];
+        while(stars.length < 180){
+          var sx=Math.random()*W, sy=Math.random()*H;
+          if(!inTextZone(sx,sy)) stars.push({x:sx,y:sy,r:Math.random()*1.3+0.2,alpha:Math.random()*0.45+0.1,twinkleSpeed:Math.random()*0.02+0.005,twinkleOffset:Math.random()*Math.PI*2});
+        }
+        var nebulae=[
+          {x:W*0.25,y:H*0.3,r:W*0.22,hue:210,sat:35,alpha:0.06},
+          {x:W*0.72,y:H*0.25,r:W*0.17,hue:240,sat:30,alpha:0.05},
+          {x:W*0.75,y:H*0.65,r:W*0.19,hue:195,sat:30,alpha:0.05},
+          {x:W*0.88,y:H*0.5,r:W*0.14,hue:220,sat:28,alpha:0.04}
+        ];
+        var floaters=[];
+        while(floaters.length<22){
+          var fx=Math.random()*W,fy=Math.random()*H;
+          if(!inTextZone(fx,fy)) floaters.push({x:fx,y:fy,vx:(Math.random()-.5)*0.25,vy:(Math.random()-.5)*0.25,r:Math.random()*1.4+0.4,alpha:Math.random()*0.35+0.15});
+        }
+        var t=0;
+        function draw(){
+          ctx.clearRect(0,0,W,H);
+          nebulae.forEach(function(n){
+            var g=ctx.createRadialGradient(n.x,n.y,0,n.x,n.y,n.r);
+            g.addColorStop(0,"hsla("+n.hue+","+n.sat+"%,62%,"+n.alpha+")");
+            g.addColorStop(0.5,"hsla("+n.hue+","+n.sat+"%,65%,"+(n.alpha*0.4)+")");
+            g.addColorStop(1,"hsla("+n.hue+","+n.sat+"%,68%,0)");
+            ctx.fillStyle=g; ctx.beginPath(); ctx.arc(n.x,n.y,n.r,0,Math.PI*2); ctx.fill();
+          });
+          stars.forEach(function(s){
+            var tw=Math.sin(t*s.twinkleSpeed*60+s.twinkleOffset);
+            var a=s.alpha*(0.6+0.4*tw);
+            ctx.fillStyle="rgba(65,90,119,"+a+")";
+            ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fill();
+            if(s.r>1.0){
+              var g=ctx.createRadialGradient(s.x,s.y,0,s.x,s.y,s.r*6);
+              g.addColorStop(0,"rgba(65,90,119,"+(a*0.12)+")");
+              g.addColorStop(1,"rgba(65,90,119,0)");
+              ctx.fillStyle=g; ctx.beginPath(); ctx.arc(s.x,s.y,s.r*6,0,Math.PI*2); ctx.fill();
+            }
+          });
+          for(var i=0;i<floaters.length;i++){
+            for(var j=i+1;j<floaters.length;j++){
+              var dx=floaters[i].x-floaters[j].x,dy=floaters[i].y-floaters[j].y,d=Math.sqrt(dx*dx+dy*dy);
+              if(d<110){
+                ctx.strokeStyle="rgba(65,90,119,"+(1-d/110)*0.18+")";
+                ctx.lineWidth=0.4;
+                ctx.beginPath(); ctx.moveTo(floaters[i].x,floaters[i].y); ctx.lineTo(floaters[j].x,floaters[j].y); ctx.stroke();
+              }
+            }
+          }
+          floaters.forEach(function(p){
+            p.x+=p.vx; p.y+=p.vy;
+            if(inTextZone(p.x+p.vx*10,p.y+p.vy*10)){
+              if(p.x<W*0.62) p.vx=Math.abs(p.vx);
+              if(p.y>H*0.48) p.vy=-Math.abs(p.vy);
+            }
+            if(p.x<0||p.x>W) p.vx*=-1;
+            if(p.y<0||p.y>H) p.vy*=-1;
+            if(!inTextZone(p.x,p.y)){
+              ctx.fillStyle="rgba(65,90,119,"+p.alpha+")";
+              ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+            }
+          });
+          t+=0.016;
+          requestAnimationFrame(draw);
+        }
+        draw();
+      }
+      if(document.readyState==="complete") init();
+      else window.addEventListener("load",init);
+    })();
   </script>
 </body>
 </html>
